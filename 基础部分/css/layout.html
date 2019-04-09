@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>layout</title>
+  <link rel="stylesheet" href="https://cdn.bootcss.com/normalize/8.0.1/normalize.min.css">
+</head>
+<style>
+*{
+  padding: 0;
+  margin: 0;
+}
+article div{
+  height: 100px;
+}
+section{
+  margin: 20px 0;
+}
+.left{
+  background: red;
+}
+.center{
+  background: #ccc;
+}
+.right{
+  background: yellow;
+}
+</style>
+<body>
+  <!-- 三栏布局
+    题目: 假设高度已知,左右各300px,中间自适应
+    延申: 如果哦假设取消,哪个还能继续使用
+    答: flex 及table布局可以继续工作
+        float布局由于是脱离文档流,所以会在两边的高度以上出现布局混乱 (触发bfc可以解决)
+        grid 是因为grid-template-rows给了高度
+    延申: 优缺点
+  -->
+  <section class="layout float">
+    <style media="screen">
+      .float .left{
+        float: left;
+        width: 300px;
+      }
+      .float .right{
+        float: right;
+        width: 300px;
+      }
+    </style>
+    <article class="left-right-center">
+      <div class="left"></div>
+      <div class="right"></div>
+      <div class="center">
+        <h1>我是中间内容</h1>
+        <p>浮动解决方案</p>
+      </div>
+    </article>
+  </section>
+  <section class="layout absolute">
+    <style>
+      .absolute .left-center-right div{
+        position: absolute;
+      }
+      .absolute .left{
+        left: 0;
+      }
+      .absolute .center{
+        left: 300px;
+        right: 300px;
+      }
+      .absolute .right{
+        right: 0;
+      }
+    </style>
+    <article class="left-center-right">
+      <div class="left"></div>
+      <div class="center">
+        <h2>我是绝对定位</h2>
+        <p>我是中间部分</p>
+        <p>我是中间部分</p>
+      </div>
+      <div class="right"></div>
+    </article>
+  </section>
+  <section class="layout flexbox">
+    <style>
+      .flexbox{
+        margin-top: 150px;
+      }
+      .flexbox .left-center-right{
+        display: flex;
+      }
+      .flexbox .left{
+        width: 300px;
+      }
+      .flexbox .center{
+        flex: 1;
+      }
+      .flexbox .right{
+        width: 300px;
+      }
+    </style>
+    <article class="left-center-right">
+      <div class="left"></div>
+      <div class="center">
+        <h1>我是flexbox布局</h1>
+      </div>
+      <div class="right"></div>
+    </article>
+  </section>
+  <section class="layout table">
+    <style>
+    .table .left-center-right{
+      width: 100%;
+      display: table;
+      height: 100px;
+    }
+    .table .left-center-right>div{
+      display: table-cell;
+    }
+    .table .left{
+      width: 300px;
+    }
+    .table .right{
+      width: 300px;
+    }
+    </style>
+    <acrcile class="left-center-right">
+      <div class="left"></div>
+      <div class="center">
+        <h1>我是table</h1>
+        <p>我只是中间部分</p>
+      </div>
+      <div class="right"></div>
+    </acrcile>
+  </section>
+  <section class="layout grid">
+    <style>
+    .grid .left-center-right{
+      display: grid;
+      width: 100%;
+      grid-template-rows: 100px;
+      grid-template-columns: 300px auto 300px
+    }
+    </style>
+    <aricile class="left-center-right">
+      <div class="left"></div>
+      <div class="center">
+        <h2>我是grid布局</h2>
+      </div>
+      <div class="right"></div>
+    </aricile>
+  </section>
+</body>
+</html>
